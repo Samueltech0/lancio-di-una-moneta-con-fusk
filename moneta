@@ -1,0 +1,17 @@
+from flask import Flask, render_template
+import random
+import os
+
+app = Flask(__name__, template_folder=os.path.abspath("templates"))
+
+@app.route("/")
+def home():
+    return "Benvenuto nel lanciatore di monete! Per lanciare la moneta, vai a <a href='/lancia_moneta'>/lancia_moneta</a>"
+
+@app.route("/lancia_moneta")
+def lancia_moneta():
+    risultato = random.choice(['Testa', 'Croce'])
+    return render_template('moneta.html', risultato=risultato)
+
+if __name__ == "__main__":
+    app.run(debug=True)
